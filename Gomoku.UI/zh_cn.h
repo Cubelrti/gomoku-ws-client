@@ -1,0 +1,11 @@
+#pragma once
+#define READY "就绪"
+#define CONNECTION_FAILED "无法连接到服务器！"
+#define WAITING_FOR_OPPONENT "正在匹配对手..."
+#define WAITING_OPPONENT_MOVE "等待对手先执子..."
+#define GAME_STARTED "游戏开始。你是黑子，请黑子先行。"
+#define OPPONENT_ACTION "上一步: "
+#define WINNER "胜利者:"
+#define USER_1 "黑子"
+#define USER_2 "白子"
+#define RESETTING_GAME "游戏复位成功！请开始一局新的游戏！"
