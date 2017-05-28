@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="头文件\Internationalization">
+      <UniqueIdentifier>{9844e490-46d8-416c-ba4e-b310b0654678}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Image">
+      <UniqueIdentifier>{a8f7ee99-9b24-4ba4-a461-e98eb6bb35ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Image\Board">
+      <UniqueIdentifier>{c33464f2-98d5-42ca-9d5e-798d6e1e1b20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Image\Chess">
+      <UniqueIdentifier>{832edbc0-ff02-496b-b472-4d7a5c242101}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Sound">
+      <UniqueIdentifier>{9165bd79-1094-4ad5-a9f3-028be061f0cf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameField.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="en_us.h">
+      <Filter>头文件\Internationalization</Filter>
+    </ClInclude>
+    <ClInclude Include="zh_cn.h">
+      <Filter>头文件\Internationalization</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GameField.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="EventHandler.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DelegateHandler.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="GameField.resx">
+      <Filter>资源文件</Filter>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="bottom.png">
+      <Filter>资源文件\Image\Board</Filter>
+    </Image>
+    <Image Include="bottomleft.png">
+      <Filter>资源文件\Image\Board</Filter>
+    </Image>
+    <Image Include="bottomright.png">
+      <Filter>资源文件\Image\Board</Filter>
+    </Image>
+    <Image Include="cross.png">
+      <Filter>资源文件\Image\Board</Filter>
+    </Image>
+    <Image Include="left.png">
+      <Filter>资源文件\Image\Board</Filter>
+    </Image>
+    <Image Include="right.png">
+      <Filter>资源文件\Image\Board</Filter>
+    </Image>
+    <Image Include="top.png">
+      <Filter>资源文件\Image\Board</Filter>
+    </Image>
+    <Image Include="topleft.png">
+      <Filter>资源文件\Image\Board</Filter>
+    </Image>
+    <Image Include="topright.png">
+      <Filter>资源文件\Image\Board</Filter>
+    </Image>
+    <Image Include="black.png">
+      <Filter>资源文件\Image\Chess</Filter>
+    </Image>
+    <Image Include="white.png">
+      <Filter>资源文件\Image\Chess</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="down.wav">
+      <Filter>资源文件\Sound</Filter>
+    </Media>
+    <Media Include="fail.mp3">
+      <Filter>资源文件\Sound</Filter>
+    </Media>
+    <Media Include="title2.MP3">
+      <Filter>资源文件\Sound</Filter>
+    </Media>
+    <Media Include="win.mp3">
+      <Filter>资源文件\Sound</Filter>
+    </Media>
+  </ItemGroup>
+</Project>
