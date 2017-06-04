@@ -59,16 +59,29 @@ namespace GomokuClient {
 		client.send(out_msg);
 		return 0;
 	}
-	int GameFlow::Init(CallbackType callback){
+	int GameFlow::Init(CallbackType callback, int serverType){
+		websocket_callback_client _client;
 		try
 		{
-			client.connect(U(SERVER_ADDR)).wait();
-			client.set_message_handler([=](websocket_incoming_message msg)
+			switch (serverType)
+			{
+			case 0:
+				_client.connect(U(CN_SERVER_ADDR)).wait();
+				break;
+			case 1:
+				_client.connect(U(CA_SERVER_ADDR)).wait();
+			case 2:
+				_client.connect(U(LOCAL_SERVER_ADDR)).wait();
+			default:
+				break;
+			}
+			_client.set_message_handler([=](websocket_incoming_message msg)
 			{
 				return msg.extract_string().then([=](string text) {
 					callback(text);
 				});
 			});
+			client = _client;
 			return 0;
 		}
 		catch (const std::exception&)
@@ -87,6 +100,7 @@ namespace GomokuClient {
 		Send(END_CONNECTION_MESSAGE);
 		return 0;
 	}
+
 	vector<string> GameFlow::SplitArguments(string text) {
 		return GomokuUtils::split(text, "_");
 	}

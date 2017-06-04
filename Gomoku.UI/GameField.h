@@ -2,7 +2,7 @@
 #include "Gomoku.h"
 #include <string>
 #include <msclr\marshal_cppstd.h>
-#include "zh_cn.h"
+#include "en_us.h"
 
 using namespace System;
 
@@ -24,8 +24,9 @@ namespace Gomoku {
 	public ref class GameField : public System::Windows::Forms::Form
 	{
 	public:
-		GameField(void)
+		GameField(int serverType)
 		{
+			this->serverType = serverType;
 			InitializeComponent();
 		}
 
@@ -51,16 +52,24 @@ namespace Gomoku {
 
 	protected:
 	private:
+		/*********************DELEGATES**********************/
 		delegate void UpdateUIDelegate(String^ message);
 		delegate void UpdatePanelDelegate(bool toEnable);
 		delegate void UpdateWinnerDelegate(int winnerType);
 		delegate void UpdateButtonDelegate(int gameType, String^ buttonName);
 		delegate void MessageChangeCallbackDelegate(std::string msg);
+		delegate void UpdateResetDelegate(bool toEnable);
+		delegate void UpdateStartDelegate(bool toEnable);
+		/*********************DELEGATES**********************/
+
+		/*********************PROPERTIES*********************/
+		int serverType;
 		int gameType = -1;
 		bool isPlaceable;
 		WindowsMediaPlayerClass ^wmp;
 		array<Button ^, 2> ^ ButtonArray;
 		MessageChangeCallbackDelegate^ managed;
+		/*********************PROPERTIES*********************/
 
 	protected:
 	private:
@@ -90,6 +99,7 @@ namespace Gomoku {
 			this->resetButton->Size = System::Drawing::Size(66, 23);
 			this->resetButton->TabIndex = 2;
 			this->resetButton->Text = L"Reset";
+			this->resetButton->Enabled = false;
 			this->resetButton->UseVisualStyleBackColor = true;
 			this->resetButton->Click += gcnew System::EventHandler(this, &GameField::resetButton_Click);
 			// 
@@ -168,6 +178,8 @@ namespace Gomoku {
 		void UpdatePanel(bool toEnable);
 		void UpdateWinner(int winnerType);
 		void UpdateButton(int gameType, String^ buttonName);
+		void UpdateStartButton(bool toEnable);
+		void UpdateResetButton(bool toEnable);
 		/***************DELEGATE_HANDLER**************/
 
 

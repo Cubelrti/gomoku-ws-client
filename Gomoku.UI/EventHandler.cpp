@@ -33,18 +33,6 @@ System::Void GameField::game_place(System::Object ^ sender, System::EventArgs ^ 
 System::Void GameField::resetButton_Click(System::Object ^ sender, System::EventArgs ^ e)
 {
 	GameFlow::Reset();
-	startButton->Enabled = true;
-	Invoke(gcnew UpdateWinnerDelegate(this, &GameField::UpdateWinner), -1);
-	Invoke(gcnew UpdatePanelDelegate(this, &GameField::UpdatePanel), false);
-	System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(GameField::typeid));
-	for each (Button^ btn in this->gamePanel->Controls)
-	{
-		btn->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"cross")));
-		btn->UseVisualStyleBackColor = true;
-		btn->Enabled = true;
-	}
-	draw_board();
-	wmp->stop();
 }
 
 System::Void GameField::GameField_Load(System::Object ^ sender, System::EventArgs ^ e)
@@ -54,7 +42,7 @@ System::Void GameField::GameField_Load(System::Object ^ sender, System::EventArg
 	GC::KeepAlive(managed);
 	IntPtr stubPointer = Marshal::GetFunctionPointerForDelegate(managed);
 	GameFlow::CallbackType functionPointer = static_cast<GameFlow::CallbackType>(stubPointer.ToPointer());
-	if (GameFlow::Init(functionPointer) != 0) {
+	if (GameFlow::Init(functionPointer,serverType) != 0) { //failed when existed?
 		MessageBox::Show("Failed to connect server.");
 		this->startButton->Enabled = false;
 		this->resetButton->Enabled = false;
@@ -88,7 +76,6 @@ System::Void GameField::GameField_Load(System::Object ^ sender, System::EventArg
 	wmp = gcnew WindowsMediaPlayerClass();
 	wmp->URL = "title2.mp3";
 	wmp->volume = 35;
-	wmp->setMode("loop", true);
 	wmp->PlayStateChange += gcnew _WMPOCXEvents_PlayStateChangeEventHandler(this, &GameField::Player_PlayStateChange);
 	wmp->MediaError += gcnew _WMPOCXEvents_MediaErrorEventHandler(this, &GameField::Player_MediaError);
 	wmp->controls->stop();

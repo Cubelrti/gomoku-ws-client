@@ -107,9 +107,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\GomokuLibrary\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies />
+      <SubSystem>Windows</SubSystem>
+      <EntryPointSymbol>Main</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -138,9 +141,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DelegateHandler.cpp" />
+    <ClCompile Include="Delegate.cpp" />
     <ClCompile Include="EventHandler.cpp" />
-    <ClCompile Include="GameField.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Signin.cpp" />
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -148,11 +152,17 @@
     <ClInclude Include="GameField.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Signin.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="zh_cn.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="GameField.resx">
       <DependentUpon>GameField.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Signin.resx">
+      <DependentUpon>Signin.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

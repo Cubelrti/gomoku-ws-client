@@ -39,23 +39,32 @@
     <ClInclude Include="zh_cn.h">
       <Filter>头文件\Internationalization</Filter>
     </ClInclude>
+    <ClInclude Include="Signin.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GameField.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="EventHandler.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="DelegateHandler.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Utility.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Signin.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Delegate.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="GameField.resx">
+      <Filter>资源文件</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Signin.resx">
       <Filter>资源文件</Filter>
     </EmbeddedResource>
   </ItemGroup>

@@ -10,7 +10,7 @@ namespace GomokuClient {
 		static int Start();
 		static int Send(std::string msg);
 		static int Action(std::string msg);
-		static int Init(CallbackType);
+		static int Init(CallbackType,int serverType);
 		static int GetClientType();
 		static int Reset();
 		static std::vector<std::string> SplitArguments(std::string text);

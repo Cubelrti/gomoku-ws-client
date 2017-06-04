@@ -14,8 +14,28 @@ using namespace Gomoku;
 
 void GameField::MessageChangeCallback(std::string msg) {
 	if (msg.find("GAME_START") != std::string::npos) {
+		Invoke(gcnew UpdateResetDelegate(this, &GameField::UpdateResetButton), true);
 		if (this->gameType == 1) Invoke(gcnew UpdatePanelDelegate(this, &GameField::UpdatePanel), true);
+		wmp->setMode("loop", true);
+		wmp->URL = "title2.mp3";
+		wmp->play();
 	}
+
+	if (msg.find("GAME_ENDED") != std::string::npos) {
+		Invoke(gcnew UpdateStartDelegate(this, &GameField::UpdateStartButton), true);
+		Invoke(gcnew UpdateResetDelegate(this, &GameField::UpdateResetButton), false);
+		Invoke(gcnew UpdateWinnerDelegate(this, &GameField::UpdateWinner), -1);
+		Invoke(gcnew UpdatePanelDelegate(this, &GameField::UpdatePanel), false);
+		System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(GameField::typeid));
+		for each (Button^ btn in this->gamePanel->Controls)
+		{
+			btn->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"cross")));
+			btn->UseVisualStyleBackColor = true;
+		}
+		draw_board();
+		wmp->stop();
+	}
+
 
 	if (msg.find("USERTYPE") != std::string::npos) {
 		auto args = GameFlow::SplitArguments(msg);
@@ -52,12 +72,10 @@ void GameField::UpdateUI(String ^ message)
 		return;
 	}
 	if (message->Contains("GAME_START")) {
-		stateIndicator->Text = GAME_STARTED;
-		wmp->controls->play();
-		return;
-	}
-	if (message->Contains("USERTYPE_2")) {
-		stateIndicator->Text = WAITING_OPPONENT_MOVE;
+		if (this->gameType == 1)
+			stateIndicator->Text = GAME_STARTED;
+		else
+			stateIndicator->Text = WAITING_OPPONENT_MOVE;
 		return;
 	}
 	if (message->Contains("ACTION")) {
@@ -72,7 +90,7 @@ void GameField::UpdateUI(String ^ message)
 		else stateIndicator->Text = WINNER + USER_2;
 		return;
 	}
-	if (message->Contains("DISCONNECTING")) {
+	if (message->Contains("GAME_ENDED")) {
 		stateIndicator->Text = RESETTING_GAME;
 		return;
 	}
@@ -82,6 +100,16 @@ void GameField::UpdateUI(String ^ message)
 void GameField::UpdatePanel(bool toEnable)
 {
 	isPlaceable = toEnable;
+}
+
+void GameField::UpdateStartButton(bool toEnable)
+{
+	startButton->Enabled = toEnable;
+}
+
+void GameField::UpdateResetButton(bool toEnable)
+{
+	resetButton->Enabled = toEnable;
 }
 
 void GameField::UpdateWinner(int winnerType)
@@ -101,6 +129,7 @@ void GameField::UpdateWinner(int winnerType)
 	}
 	wmp->stop();
 	if (winnerType != -1) {
+		wmp->setMode("loop", false);
 		if (winnerType == this->gameType) {
 			wmp->URL = "win.mp3";
 		}
