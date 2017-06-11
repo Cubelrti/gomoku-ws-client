@@ -31,6 +31,7 @@ void GameField::MessageChangeCallback(std::string msg) {
 		{
 			btn->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"cross")));
 			btn->UseVisualStyleBackColor = true;
+			Invoke(gcnew UpdateButtonDelegate(this, &GameField::UpdateButton), btn);
 		}
 		draw_board();
 		wmp->stop();
@@ -52,7 +53,7 @@ void GameField::MessageChangeCallback(std::string msg) {
 			Invoke(gcnew UpdatePanelDelegate(this, &GameField::UpdatePanel), true);
 		if (gameType == this->gameType)
 			Invoke(gcnew UpdatePanelDelegate(this, &GameField::UpdatePanel), false);
-		Invoke(gcnew UpdateButtonDelegate(this, &GameField::UpdateButton), gameType, buttonName);
+		Invoke(gcnew UpdateButtonByNameDelegate(this, &GameField::UpdateButtonByName), gameType, buttonName);
 	}
 	if (msg.find("WINNER") != std::string::npos) {
 		auto args = GameFlow::SplitArguments(msg);
@@ -67,7 +68,10 @@ void GameField::UpdateUI(String ^ message)
 {
 	//i18n decl
 	array<wchar_t> ^delim = { '_' };
-	if (message->Contains("USERTYPE_1")) {
+	if (message->Contains("PING")) {
+		return;
+	}
+	if (message->Contains("SEARCHING")) {
 		stateIndicator->Text = WAITING_FOR_OPPONENT;
 		return;
 	}
@@ -76,6 +80,18 @@ void GameField::UpdateUI(String ^ message)
 			stateIndicator->Text = GAME_STARTED;
 		else
 			stateIndicator->Text = WAITING_OPPONENT_MOVE;
+		return;
+	}
+	if (message->Contains("USERTYPE_2")) {
+		stateIndicator->Text = GAME_STARTED;
+		return;
+	}
+	if (message->Contains("RANKING_")) {
+		if (rankingForm && rankingForm->Created) {
+			return;
+		}
+		rankingForm = gcnew Gomoku::Ranking(message);
+		rankingForm->Show();
 		return;
 	}
 	if (message->Contains("ACTION")) {
@@ -138,7 +154,7 @@ void GameField::UpdateWinner(int winnerType)
 	}
 }
 
-void GameField::UpdateButton(int gameType, String ^ buttonName)
+void GameField::UpdateButtonByName(int gameType, String ^ buttonName)
 {
 	String^ buttonColor;
 	System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(GameField::typeid));
@@ -161,4 +177,8 @@ void GameField::UpdateButton(int gameType, String ^ buttonName)
 	}
 	ctrl->Enabled = false;
 	ctrl->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(buttonColor)));
+}
+
+void  GameField::UpdateButton(Button^ button) {
+	button->Enabled = true;
 }

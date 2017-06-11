@@ -144,12 +144,17 @@
     <ClCompile Include="Delegate.cpp" />
     <ClCompile Include="EventHandler.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Ranking.cpp" />
     <ClCompile Include="Signin.cpp" />
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="en_us.h" />
     <ClInclude Include="GameField.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="lang.h" />
+    <ClInclude Include="Ranking.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Signin.h">
@@ -160,6 +165,9 @@
   <ItemGroup>
     <EmbeddedResource Include="GameField.resx">
       <DependentUpon>GameField.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ranking.resx">
+      <DependentUpon>Ranking.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Signin.resx">
       <DependentUpon>Signin.h</DependentUpon>

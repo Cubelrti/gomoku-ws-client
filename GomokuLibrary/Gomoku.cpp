@@ -44,9 +44,18 @@ namespace GomokuClient {
 	}
 	int GameFlow::Start() { 
 		websocket_outgoing_message out_msg;
-		Send(START_CONNECTION_MESSAGE);
+		Send(START_GAME_MESSAGE);
 		return 0;
 	}
+	int GameFlow::StartRanking(string Id) {
+		Send("RANKING_" + Id);
+		return 0;
+	}
+	int GameFlow::GetRanking() {
+		Send("GET_RANK");
+		return 0;
+	}
+
 	int GameFlow::Send(std::string msg) {
 		websocket_outgoing_message out_msg;
 		out_msg.set_utf8_message(msg);
@@ -97,10 +106,14 @@ namespace GomokuClient {
 	}
 
 	int GameFlow::Reset() {
-		Send(END_CONNECTION_MESSAGE);
+		Send(RESET_GAME_MESSAGE);
 		return 0;
 	}
-
+	int GameFlow::Disconnect() {
+		client.close().wait();
+		return 0;
+		
+	}
 	vector<string> GameFlow::SplitArguments(string text) {
 		return GomokuUtils::split(text, "_");
 	}

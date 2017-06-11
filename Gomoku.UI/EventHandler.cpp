@@ -13,8 +13,19 @@ using namespace Gomoku;
 
 System::Void GameField::startButton_Click(System::Object ^ sender, System::EventArgs ^ e)
 {
+	this->isConnected = true;
+	if (this->isRank) {
+		String^ msg = this->id;
+		GameFlow::StartRanking(msclr::interop::marshal_as<std::string>(msg));
+		startButton->Enabled = false;
+		return;
+	}
 	GameFlow::Start();
 	startButton->Enabled = false;
+}
+
+System::Void GameField::rankButton_Click(System::Object ^ sender, System::EventArgs ^ e) {
+	GameFlow::GetRanking();
 }
 
 System::Void GameField::game_place(System::Object ^ sender, System::EventArgs ^ e)
@@ -46,6 +57,7 @@ System::Void GameField::GameField_Load(System::Object ^ sender, System::EventArg
 		MessageBox::Show("Failed to connect server.");
 		this->startButton->Enabled = false;
 		this->resetButton->Enabled = false;
+		this->rankingButton->Enabled = false;
 	};
 	//dynamically create button
 	System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(GameField::typeid));
@@ -79,7 +91,8 @@ System::Void GameField::GameField_Load(System::Object ^ sender, System::EventArg
 	wmp->PlayStateChange += gcnew _WMPOCXEvents_PlayStateChangeEventHandler(this, &GameField::Player_PlayStateChange);
 	wmp->MediaError += gcnew _WMPOCXEvents_MediaErrorEventHandler(this, &GameField::Player_MediaError);
 	wmp->controls->stop();
-
+	//i18n decl
+	this->stateLabel->Text = STATUS;
 }
 
 System::Void GameField::Player_PlayStateChange(int state)
