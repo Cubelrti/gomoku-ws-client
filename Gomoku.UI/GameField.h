@@ -80,9 +80,7 @@ namespace Gomoku {
 		WindowsMediaPlayerClass ^wmp;
 		array<Button ^, 2> ^ ButtonArray;
 		MessageChangeCallbackDelegate^ managed;
-	
-
-			 /*********************PROPERTIES*********************/
+		/*********************PROPERTIES*********************/
 
 	protected:
 	private:

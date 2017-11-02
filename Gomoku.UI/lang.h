@@ -1,2 +1,2 @@
 #pragma once
-#include "zh_cn.h"
+#include "en_us.h"

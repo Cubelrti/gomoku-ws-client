@@ -17,5 +17,6 @@ namespace GomokuClient {
 		static int Reset();
 		static int Disconnect();
 		static std::vector<std::string> SplitArguments(std::string text);
+		static std::vector<std::string> split(const std::string& s, const std::string& delim, const bool keep_empty = true);
 	};
 }

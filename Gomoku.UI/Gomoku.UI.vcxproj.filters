@@ -28,6 +28,9 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Sources\GameField">
+      <UniqueIdentifier>{7f0f6925-93a7-4676-b5c9-ed23a1e3d1b0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameField.h">
@@ -50,23 +53,23 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="EventHandler.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Utility.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="Signin.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="Delegate.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="Ranking.cpp">
       <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Delegate.cpp">
+      <Filter>Sources\GameField</Filter>
+    </ClCompile>
+    <ClCompile Include="EventHandler.cpp">
+      <Filter>Sources\GameField</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility.cpp">
+      <Filter>Sources\GameField</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
